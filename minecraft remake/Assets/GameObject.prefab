@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 33638807709227784}
   - component: {fileID: 114279599554699708}
   m_Layer: 0
-  m_Name: ChunkPrefab
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,3 +108,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   update: 1
+  world: {fileID: 0}

@@ -5,43 +5,56 @@ using System.Collections;
 [RequireComponent(typeof(MeshCollider))]
 public class Chunk : MonoBehaviour 
 {
-    Block[,,] blocks;
+    Block[,,] blocks = new Block[chunkSize, chunkSize, chunkSize];
     public static int chunkSize = 16;
     public bool update = true;
 
     MeshFilter filter;
     MeshCollider coll;
-    
-	void Start ()
+
+    public World world;
+    public WorldPos pos;
+
+    void Start ()
     {
         filter = gameObject.GetComponent<MeshFilter>();
         coll = gameObject.GetComponent<MeshCollider>();
-
-        //example chunk
-        blocks = new Block[chunkSize, chunkSize, chunkSize];
-        for (int x = 0; x < chunkSize; x++)
-        {
-            for (int y = 0; y < chunkSize; y++)
-            {
-                for (int z = 0; z < chunkSize; z++)
-                {
-                    blocks[x, y, z] = new BlockAir();
-                }
-            }
-        }
-        blocks[3, 5, 2] = new Block();
-        blocks[4, 5, 2] = new BlockGrass();
-        UpdateChunk();
 	}
 	
 	void Update ()
     {
-
+        if (update)
+        {
+            update = false;
+            UpdateChunk();
+        }
 	}
 
     public Block GetBlock(int x, int y, int z)
     {
-        return blocks[x, y, z];
+        if (InRange(x) && InRange(y) && InRange(z))
+            return blocks[x, y, z];
+        return world.GetBlock(pos.x + x, pos.y + y, pos.z + z);
+    }
+
+    public static bool InRange(int index)
+    {
+        if (index < 0 || index >= chunkSize)
+            return false;
+
+        return true;
+    }
+
+    public void SetBlock(int x, int y, int z, Block block)
+    {
+        if (InRange(x) && InRange(y) && InRange(z))
+        {
+            blocks[x, y, z] = block;
+        }
+        else
+        {
+            world.SetBlock(pos.x + x, pos.y + y, pos.z + z, block);
+        }
     }
 
     //updates de chunks gebaseerd op de content
