@@ -11,7 +11,7 @@ public class Chunk : MonoBehaviour
 
     MeshFilter filter;
     MeshCollider coll;
-
+    
 	void Start ()
     {
         filter = gameObject.GetComponent<MeshFilter>();
