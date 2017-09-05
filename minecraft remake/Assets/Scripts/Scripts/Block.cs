@@ -54,6 +54,8 @@ public class Block
         meshData.vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
         meshData.vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
         meshData.AddQuadTriangles();
+
+        meshData.uv.AddRange(FaceUVs(Direction.up));
         return meshData;
     }
 
@@ -63,8 +65,9 @@ public class Block
         meshData.vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
         meshData.vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
         meshData.vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
-
         meshData.AddQuadTriangles();
+
+        meshData.uv.AddRange(FaceUVs(Direction.down));
         return meshData;
     }
 
@@ -74,8 +77,9 @@ public class Block
         meshData.vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
         meshData.vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
         meshData.vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
-
         meshData.AddQuadTriangles();
+
+        meshData.uv.AddRange(FaceUVs(Direction.north));
         return meshData;
     }
 
@@ -85,8 +89,9 @@ public class Block
         meshData.vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
         meshData.vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
         meshData.vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
-
         meshData.AddQuadTriangles();
+
+        meshData.uv.AddRange(FaceUVs(Direction.east));
         return meshData;
     }
 
@@ -96,8 +101,9 @@ public class Block
         meshData.vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
         meshData.vertices.Add(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
         meshData.vertices.Add(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
-
         meshData.AddQuadTriangles();
+
+        meshData.uv.AddRange(FaceUVs(Direction.south));
         return meshData;
     }
 
@@ -107,8 +113,9 @@ public class Block
         meshData.vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
         meshData.vertices.Add(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
         meshData.vertices.Add(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
-
         meshData.AddQuadTriangles();
+
+        meshData.uv.AddRange(FaceUVs(Direction.west));
         return meshData;
     }
 
@@ -142,7 +149,7 @@ public class Block
         UVs[2] = new Vector2(tileSize * tilePos.x, tileSize * tilePos.y + tileSize);
         UVs[3] = new Vector2(tileSize * tilePos.x, tileSize * tilePos.y);
 
-        return UVs
+        return UVs;
     }
 
     public virtual Tile TexturePosition(Direction direction)
@@ -156,4 +163,4 @@ public class Block
     public enum Direction { north, east, south, west, up, down };
 }
 
-public struct Tile { public int x; public int y }
+public struct Tile { public int x; public int y; }

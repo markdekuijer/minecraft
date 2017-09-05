@@ -30,6 +30,7 @@ public class Chunk : MonoBehaviour
             }
         }
         blocks[3, 5, 2] = new Block();
+        blocks[4, 5, 2] = new BlockGrass();
         UpdateChunk();
 	}
 	
