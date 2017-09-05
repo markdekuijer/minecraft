@@ -67,5 +67,16 @@ public class Chunk : MonoBehaviour
         filter.mesh.Clear();
         filter.mesh.vertices = meshData.vertices.ToArray();
         filter.mesh.triangles = meshData.triangles.ToArray();
+        filter.mesh.uv = meshData.uv.ToArray();
+        //filter.mesh.RecalculateNormals();
+
+        //addedP2
+        coll.sharedMesh = null;
+        Mesh mesh = new Mesh();
+        mesh.vertices = meshData.vertices.ToArray();
+        mesh.triangles = meshData.colTriangles.ToArray();
+        mesh.RecalculateNormals();
+
+        coll.sharedMesh = mesh;
     }
 }
