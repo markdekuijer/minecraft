@@ -10,6 +10,12 @@ public class World : MonoBehaviour
     public string worldName = "world";
     public GameObject chunkPrefab;
 
+    public int newChunkX;
+    public int newChunkY;
+    public int newChunkZ;
+
+    public bool genChunk;
+
     void Start()
     {
         for (int x = -2; x < 2; x++)
@@ -20,6 +26,25 @@ public class World : MonoBehaviour
                 {
                     CreateChunk(x * 16, y * 16, z * 16);
                 }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (genChunk)
+        {
+            genChunk = false;
+            WorldPos chunkPos = new WorldPos(newChunkX, newChunkY, newChunkZ);
+            Chunk chunk = null;
+
+            if (chunks.TryGetValue(chunkPos, out chunk))
+            {
+                DestroyChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+            }
+            else
+            {
+                CreateChunk(chunkPos.x, chunkPos.y, chunkPos.z);
             }
         }
     }
@@ -54,6 +79,9 @@ public class World : MonoBehaviour
                 }
             }
         }
+
+        newChunk.SetBlockUnmodified();
+        Serialization.Load(newChunk);
     }
 
     public void DestroyChunk(int x, int y, int z)
@@ -61,6 +89,7 @@ public class World : MonoBehaviour
         Chunk chunk = null;
         if (chunks.TryGetValue(new WorldPos(x, y, z), out chunk))
         {
+            Serialization.SaveChunk(chunk);
             Destroy(chunk.gameObject);
             chunks.Remove(new WorldPos(x, y, z));
         }
@@ -122,6 +151,7 @@ public class World : MonoBehaviour
     }
 }
 
+[Serializable]
 public struct WorldPos
 {
     public int x, y, z;

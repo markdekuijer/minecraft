@@ -57,6 +57,14 @@ public class Chunk : MonoBehaviour
         }
     }
 
+    public void SetBlockUnmodified()
+    {
+        foreach (Block block in blocks)
+        {
+            block.changed = false;
+        }
+    }
+
     //updates de chunks gebaseerd op de content
     void UpdateChunk()
     {
