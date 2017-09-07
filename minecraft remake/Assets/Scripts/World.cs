@@ -7,6 +7,7 @@ public class World : MonoBehaviour
 {
     Dictionary<WorldPos, Chunk> chunks = new Dictionary<WorldPos, Chunk>();
 
+    public string worldName = "world";
     public GameObject chunkPrefab;
 
     void Start()

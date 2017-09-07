@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(MeshCollider))]
 public class Chunk : MonoBehaviour 
 {
-    Block[,,] blocks = new Block[chunkSize, chunkSize, chunkSize];
+    public Block[,,] blocks = new Block[chunkSize, chunkSize, chunkSize];
     public static int chunkSize = 16;
     public bool update = true;
 
@@ -92,4 +92,5 @@ public class Chunk : MonoBehaviour
 
         coll.sharedMesh = mesh;
     }
+
 }
