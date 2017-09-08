@@ -18,11 +18,11 @@ public class World : MonoBehaviour
 
     void Start()
     {
-        for (int x = -2; x < 2; x++)
+        for (int x = -4; x < 4; x++)
         {
-            for (int y = -1; y < 1; y++)
+            for (int y = -1; y < 3; y++)
             {
-                for (int z = -1; z < 1; z++)
+                for (int z = -4; z < 4; z++)
                 {
                     CreateChunk(x * 16, y * 16, z * 16);
                 }
@@ -62,26 +62,28 @@ public class World : MonoBehaviour
 
         chunks.Add(worldPos, newChunk);
 
-        for (int xi = 0; xi < 16; xi++)
-        {
-            for (int yi = 0; yi < 16; yi++)
-            {
-                for (int zi = 0; zi < 16; zi++)
-                {
-                    if (yi <= 7)
-                    {
-                        SetBlock(x + xi, y + yi, z + zi, new BlockGrass());
-                    }
-                    else
-                    {
-                        SetBlock(x + xi, y + yi, z + zi, new BlockAir());
-                    }
-                }
-            }
-        }
+        //for (int xi = 0; xi < 16; xi++)
+        //{
+        //    for (int yi = 0; yi < 16; yi++)
+        //    {
+        //        for (int zi = 0; zi < 16; zi++)
+        //        {
+        //            if (yi <= 7)
+        //            {
+        //                SetBlock(x + xi, y + yi, z + zi, new BlockGrass());
+        //            }
+        //            else
+        //            {
+        //                SetBlock(x + xi, y + yi, z + zi, new BlockAir());
+        //            }
+        //        }
+        //    }
+        //}
 
+        var terrainGen = new TerrainGen();
+        newChunk = terrainGen.ChunkGen(newChunk);
         newChunk.SetBlockUnmodified();
-        Serialization.Load(newChunk);
+        bool loaded = Serialization.Load(newChunk);
     }
 
     public void DestroyChunk(int x, int y, int z)
