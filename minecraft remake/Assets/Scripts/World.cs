@@ -5,49 +5,49 @@ using System;
 
 public class World : MonoBehaviour 
 {
-    Dictionary<WorldPos, Chunk> chunks = new Dictionary<WorldPos, Chunk>();
+    public Dictionary<WorldPos, Chunk> chunks = new Dictionary<WorldPos, Chunk>();
 
     public string worldName = "world";
     public GameObject chunkPrefab;
 
-    public int newChunkX;
-    public int newChunkY;
-    public int newChunkZ;
+    //public int newChunkX;
+    //public int newChunkY;
+    //public int newChunkZ;
 
-    public bool genChunk;
+    //public bool genChunk;
 
-    void Start()
-    {
-        for (int x = -4; x < 4; x++)
-        {
-            for (int y = -1; y < 3; y++)
-            {
-                for (int z = -4; z < 4; z++)
-                {
-                    CreateChunk(x * 16, y * 16, z * 16);
-                }
-            }
-        }
-    }
+    //void Start()
+    //{
+    //    for (int x = -4; x < 4; x++)
+    //    {
+    //        for (int y = -1; y < 3; y++)
+    //        {
+    //            for (int z = -4; z < 4; z++)
+    //            {
+    //                CreateChunk(x * 16, y * 16, z * 16);
+    //            }
+    //        }
+    //    }
+    //}
 
-    private void Update()
-    {
-        if (genChunk)
-        {
-            genChunk = false;
-            WorldPos chunkPos = new WorldPos(newChunkX, newChunkY, newChunkZ);
-            Chunk chunk = null;
+    //private void Update()
+    //{
+    //    if (genChunk)
+    //    {
+    //        genChunk = false;
+    //        WorldPos chunkPos = new WorldPos(newChunkX, newChunkY, newChunkZ);
+    //        Chunk chunk = null;
 
-            if (chunks.TryGetValue(chunkPos, out chunk))
-            {
-                DestroyChunk(chunkPos.x, chunkPos.y, chunkPos.z);
-            }
-            else
-            {
-                CreateChunk(chunkPos.x, chunkPos.y, chunkPos.z);
-            }
-        }
-    }
+    //        if (chunks.TryGetValue(chunkPos, out chunk))
+    //        {
+    //            DestroyChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+    //        }
+    //        else
+    //        {
+    //            CreateChunk(chunkPos.x, chunkPos.y, chunkPos.z);
+    //        }
+    //    }
+    //}
 
     public void CreateChunk(int x, int y, int z)
     {
